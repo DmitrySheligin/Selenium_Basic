@@ -48,6 +48,8 @@ public class Sample3Task {
 //         check that it is True that value of second button is
 //         "this is Also a Button" if you ignore Caps Locks
 //         fail with custom error message:
+        String button2Name = driver.findElement(By.id("buttonId")).getAttribute("value");
+        System.out.println(button2Name);
     }
 
     @Test
