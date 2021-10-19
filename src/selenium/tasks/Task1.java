@@ -3,7 +3,9 @@ package selenium.tasks;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.File;
@@ -29,6 +31,19 @@ public class Task1 {
     public void errorOnText() {
 //        TODO
 //        enter a text instead of a number, check that correct error is seen
+        String expectedError = "Please enter a number";
+        String expectedErrorSelector = "#ch1_error";
+        String inputFieldSelector = "#numb";
+        String text = "abcdef";
+        String submitSelector = ".w3-btn";
+
+        WebElement inputField = driver.findElement(By.cssSelector(inputFieldSelector));
+        WebElement error = driver.findElement(By.cssSelector(expectedErrorSelector));
+        WebElement submit = driver.findElement(By.cssSelector(submitSelector));
+
+        inputField.sendKeys(text);
+        submit.click();
+        assertEquals();
     }
 
     @Test
@@ -50,6 +65,29 @@ public class Task1 {
 //        TODO
 //        enter a number between 50 and 100 digit in the input (square root of which doesn't have a remainder, e.g. 2 is square root of 4),
 //        then and press submit and check that correct no error is seen and check that square root is calculated correctly
+        WebElement numInput = driver.findElement(By.id("numb"));
+        WebElement submit = driver.findElement(By.cssSelector(".w3-btn"));
+        WebElement errorText = driver.findElement(By.id("ch1_error"));
+
+        try {
+            numInput.sendKeys("80");
+            submit.click();
+            Alert alert = driver.switchTo().alert();
+            assertEquals("Square root of 80 is 8.94", alert.getText());
+            alert.accept();
+        } catch (AssertionError e) {
+            System.out.println("Error in the first half of correctSquareRootWithRemainder");
+            e.printStackTrace();
+        }
+
+        try {
+            assertEquals("", errorText.getText());
+        } catch (AssertionError e) {
+            System.out.println("Error in the second half of correctSquareRootWithRemainder");
+            e.printStackTrace();
+        }
+
+
     }
 
     @Test

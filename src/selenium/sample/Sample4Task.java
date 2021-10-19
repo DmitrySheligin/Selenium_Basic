@@ -46,6 +46,24 @@ public class Sample4Task {
 //        check that the button "Clear Result" is clickable now
 //        click on "Clear Result"
 //        check that the text is still (""), but it is not displayed
+        int inputNumber = 32123123;
+        String ClearResultButtonSelector = "#clear_result_button_number";
+        String resultNumberSelector = "#result_number";
+        String numberSelector = "number";
+        String resultButtonSelector = "result_button_number";
+
+        driver.get (base_url);
+        assertTrue("Base url is not the same, as driver url", driver.getCurrentUrl().equals(base_url));
+        WebElement number = driver.findElement((By.cssSelector(numberSelector)));
+        if (number != null) {
+            number.clear();
+            number.sendKeys(Integer.toString(inputNumber));
+            WebElement number = driver.findElement(By.cssSelector(clearResultButtonSelector));
+            if (clearResult != null) {
+        }
+
+
+
     }
 
     @Test
@@ -55,5 +73,10 @@ public class Sample4Task {
 //        click on "This is a link to Homepage"
 //        check that current url is not base_url
 //        verify that current url is homepage
+
+        assertFalse(showButton.isEnabled());
+        assertFalse(text.isDisplayed()); // "I am here!" is NOT seen
+        assertTrue(showButton.isEnabled()); // "Show" button is enabled (clickable)
+        assertFalse(hideButton.isEnabled())
     }
 }

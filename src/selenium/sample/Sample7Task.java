@@ -45,6 +45,27 @@ public class Sample7Task {
 //        tick  "Option 3"
 //        click result
 //        check that text 'You selected value(s): Option 2, Option 3' is being displayed
+            List<WebElement> checkBoxes = driver.findElements(By.cssSelector(".w3-check[type='checkbox']"));
+
+            for (WebElement checkBox : checkBoxes) {
+                assertFalse(checkBox.isSelected()); // checkboxes are NOT selected
+                checkBox.click();
+                WebElement option3 = driver.findElement(By.cssSelector(".w3-check[value='Option 3'][type='checkbox']"));
+                assertFalse(option3.isSelected());
+
+                WebElement datePicker = driver.findElement(By.id("vfb-8"));
+                datePicker.click();
+                WebElement calWidget = driver.findElement(By.id("ui-datepicker-div"));
+                WebElement calBack = calWidget.findElement(By.className("ui-datepicker-prev"));
+                WebElement calMonth = calWidget.findElement(By.className("ui-datepicker-month"));
+                WebElement calYear = calWidget.findElement(By.className("ui-datepicker-year"));
+                while (!((calMonth.getText() == "2007") && (calYear.getText() == "July"))) {
+                    calBack.click();
+                    Thread.sleep(100);
+                    calBack = calWidget.findElement(By.className("ui-datepicker-prev"));
+                    calMonth = calWidget.findElement(By.className("ui-datepicker-month"));
+                    calYear = calWidget.findElement(By.className("ui-datepicker-year"));
+                }
     }
 
 
@@ -82,5 +103,16 @@ public class Sample7Task {
 //         TODO:
 //        enter date '2 of May 1959' using text
 //        check that correct date is added
+
+                WebElement datePicker = driver.findElement(By.id("vfb-8"));
+                datePicker.sendKeys("05/02/1959");
+
+                //Click outside of the calendar widget to close it, because the result button is behind it
+                driver.findElement(By.xpath("/html/body/div[4]/div[3]/div/h2")).click();
+                driver.findElement(By.id("result_button_date")).click();
+
+                assertEquals("You entered date: 05/02/1959", driver.findElement(By.id("result_date")).getText());
+
+            }
     }
 }
