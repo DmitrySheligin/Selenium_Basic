@@ -50,6 +50,21 @@ public class Task1 {
     public void errorOnNumberTooSmall() {
 //        TODO
 //        enter number which is too small (below 50), check that correct error is seen
+
+        WebElement numInput = driver.findElement(By.id("numb"));
+        WebElement submit = driver.findElement(By.cssSelector(".w3-btn"));
+        WebElement errorText = driver.findElement(By.id("ch1-error"));
+
+        try {
+            numInput.sendKeys("35");
+            submit.click();
+            Alert alert = driver.switchTo().alert();
+            assertEquals("Number is too small", alert.getText());
+        catch (AssertionError b) {
+            System.out.println("Number is too small");
+            b.printStackTrace();
+        }
+        }
     }
 
     @Test
