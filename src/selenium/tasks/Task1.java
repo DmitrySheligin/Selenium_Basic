@@ -64,7 +64,7 @@ public class Task1 {
             System.out.println("Number is too small");
             b.printStackTrace();
         }
-        }
+        
     }
 
     @Test
@@ -73,6 +73,21 @@ public class Task1 {
 //        BUG: if I enter number 666 no errors where seen
 //        TODO
 //        enter number which is too big (above 100), check that correct error is seen
+
+        WebElement numInput = driver.findElement(By.id("numb"));
+        WebElement submit = driver.findElement(By.cssSelector(".w3-btn"));
+        WebElement errorText = driver.findElement(By.id("ch1-error"));
+
+        try {
+            numInput.sendKeys("120");
+            submit.click();
+            Alert alert = driver.switchTo().alert();
+            assertEquals("Number is too big", alert.getText());
+        catch (AssertionError c) {
+                System.out.println("Number is too big");
+                c.printStackTrace();
+            }
+        }
     }
 
     @Test
