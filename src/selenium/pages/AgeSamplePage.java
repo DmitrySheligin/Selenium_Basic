@@ -7,7 +7,7 @@ import org.openqa.selenium.support.How;
 import static org.junit.Assert.*;
 
 
-public class AgeSamplePage extends GenericSamplePage {
+public class AgeSamplePage extends StartSamplePage {
     @FindBy(how = How.ID, using = "name") // By.id("name")
     private WebElement nameInput; // WebElement nameInput = driver.findElement(By.id("name"));
     @FindBy(how = How.NAME, using = "age") // By.name("age")

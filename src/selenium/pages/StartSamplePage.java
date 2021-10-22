@@ -7,7 +7,7 @@ import org.openqa.selenium.support.How;
 import static org.junit.Assert.assertEquals;
 
 
-public class GenericSamplePage {
+public class StartSamplePage {
     @FindBy(how = How.TAG_NAME, using = "h1")
     private WebElement header;
 

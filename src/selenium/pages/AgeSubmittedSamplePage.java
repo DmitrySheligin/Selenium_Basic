@@ -6,7 +6,7 @@ import org.openqa.selenium.support.How;
 
 import static org.junit.Assert.assertEquals;
 
-public class AgeSubmittedSamplePage extends GenericSamplePage {
+public class AgeSubmittedSamplePage extends StartSamplePage {
     @FindBy(how = How.CSS, using = "#message")
     private WebElement message;
     @FindBy(how = How.TAG_NAME, using = "button")
